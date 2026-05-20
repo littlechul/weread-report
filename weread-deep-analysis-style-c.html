@@ -1,0 +1,1984 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>微信读书 · 个人认知结构与深度阅读研究报告 - 风格C：青出于蓝</title>
+  <style>
+    /* --- 风格C：【青出于蓝】(WeRead Classic Blue/White) 极简现代视觉排版 --- */
+    :root {
+      --bg-color: #f4f8fb;       /* 经典微读清透淡蓝底色 */
+      --card-bg: #ffffff;        /* 纯白卡片，突出光影和层次 */
+      --card-border: rgba(28, 98, 255, 0.08); /* 轻盈浅蓝框线 */
+      --card-hover-border: rgba(28, 98, 255, 0.25); /* 悬浮时微信蓝框线 */
+      
+      /* 微信读书官方质感色系，清爽、克制且富含科技感 */
+      --primary: #1c62ff;        /* 微信读书经典蓝 */
+      --primary-gradient: linear-gradient(135deg, #1c62ff 0%, #4e89ff 100%);
+      --secondary: #059669;      /* 正念绿 - 伴随听书与调频 */
+      --accent: #d97706;         /* 智慧金/琥珀黄 - 爆发峰值与金句 */
+      --purple: #7c3aed;         /* 思辨紫 - 哲学自省与对立平衡 */
+      --danger: #ef4444;         /* 警示红 - 失衡诊断与盲区 */
+      
+      --text-main: #1e293b;      /* 严谨深石板蓝，避免纯黑的生硬 */
+      --text-muted: #64748b;     /* 中性辅助灰蓝 */
+      --text-dark: #94a3b8;      /* 暗灰蓝 */
+      
+      /* 现代极简无衬线字体，极高清晰度与阅读舒适感 */
+      --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", "Microsoft YaHei", sans-serif;
+      --shadow-sm: 0 4px 12px rgba(28, 98, 255, 0.02);
+      --shadow-md: 0 12px 30px rgba(28, 98, 255, 0.05);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      /* 经典微读底部分布式柔和渐变 */
+      background-image: radial-gradient(circle at 100% 0%, rgba(28, 98, 255, 0.03) 0%, transparent 40%),
+                        radial-gradient(circle at 0% 100%, rgba(124, 58, 237, 0.02) 0%, transparent 40%);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      font-size: 17px;
+      line-height: 1.65;
+      padding: 60px 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 1100px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 36px;
+      padding-bottom: 120px;
+    }
+
+    /* --- 微信经典卡片：边缘圆润，微带阴影与浮力感 --- */
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 40px;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: var(--card-hover-border);
+      box-shadow: var(--shadow-md);
+    }
+
+    /* --- 1. HERO 头部横幅 (官方大气的双极模型展示) --- */
+    .hero-banner {
+      background: #ffffff;
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 50px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      position: relative;
+      box-shadow: 0 10px 40px rgba(28, 98, 255, 0.03);
+    }
+
+    /* --- 读者账号专属卡片 --- */
+    .reader-profile {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      background: rgba(28, 98, 255, 0.03);
+      border: 1px solid rgba(28, 98, 255, 0.08);
+      border-radius: 16px;
+      padding: 16px 24px;
+      margin-top: 10px;
+      width: 100%;
+      max-width: 680px;
+    }
+
+    .avatar-area {
+      position: relative;
+      width: 52px;
+      height: 52px;
+      flex-shrink: 0;
+    }
+
+    .reader-avatar {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      border: 2px solid var(--primary);
+    }
+
+    .reader-badge {
+      position: absolute;
+      bottom: -6px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(135deg, #ffd700 0%, #ffa500 100%);
+      color: #7c2d12;
+      font-size: 0.65rem;
+      font-weight: 800;
+      padding: 1px 6px;
+      border-radius: 50px;
+      white-space: nowrap;
+      box-shadow: 0 2px 6px rgba(249, 115, 22, 0.2);
+    }
+
+    .reader-info {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      flex-grow: 1;
+    }
+
+    .reader-nickname-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .reader-name {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: #0f172a;
+    }
+
+    .account-tag {
+      background: #eff6ff;
+      color: var(--primary);
+      font-size: 0.75rem;
+      font-weight: bold;
+      padding: 2px 8px;
+      border-radius: 4px;
+      border: 1px solid rgba(28, 98, 255, 0.1);
+    }
+
+    .reader-bio {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-style: italic;
+      line-height: 1.4;
+    }
+
+    .reader-meta-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.8rem;
+      color: var(--text-dark);
+      flex-wrap: wrap;
+    }
+
+    .reader-meta-row .divider {
+      color: #e2e8f0;
+    }
+
+    /* 类似书籍缎带的书签装饰 */
+    .hero-banner::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 50px;
+      width: 24px;
+      height: 40px;
+      background: var(--primary);
+      border-radius: 0 0 4px 4px;
+      opacity: 0.85;
+    }
+
+    .report-meta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      color: var(--primary);
+      text-transform: uppercase;
+    }
+
+    .hero-title {
+      font-size: 2.8rem;
+      font-weight: 800;
+      line-height: 1.3;
+      color: #0f172a;
+      letter-spacing: -0.01em;
+    }
+
+    .hero-desc {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      max-width: 900px;
+    }
+
+    /* --- 2. 首页高亮：分析摘要 --- */
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-top: 12px;
+    }
+
+    .summary-box {
+      background: #f8fafc;
+      border: 1px solid rgba(28, 98, 255, 0.04);
+      border-radius: 12px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .summary-box:hover {
+      background: #ffffff;
+      border-color: rgba(28, 98, 255, 0.15);
+      box-shadow: 0 8px 24px rgba(28, 98, 255, 0.03);
+    }
+
+    .summary-box .label {
+      font-size: 0.9rem;
+      font-weight: bold;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .summary-box .val {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: #0f172a;
+    }
+
+    .summary-box .desc {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* --- 数据说明卡片 (扁平拟真化) --- */
+    .data-spec-card {
+      background: #ffffff;
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 24px 30px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .spec-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .spec-lbl {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      font-weight: bold;
+    }
+
+    .spec-val {
+      font-size: 1.05rem;
+      color: #0f172a;
+      font-weight: 800;
+    }
+
+    .spec-val span {
+      font-size: 0.8rem;
+      color: var(--text-dark);
+      font-weight: 500;
+      margin-left: 4px;
+    }
+
+    /* --- 各级标题系统 (极简蓝调) --- */
+    .section-title {
+      font-size: 1.55rem;
+      font-weight: 800;
+      color: #0f172a;
+      margin-bottom: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px 24px;
+      border-bottom: 1px solid #e2e8f0;
+      padding-bottom: 12px;
+    }
+
+    .section-title .title-main {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+
+    .section-title .section-no {
+      font-size: 1.25rem;
+      color: #ffffff;
+      background: var(--primary-gradient);
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+
+    .section-title span.subtitle {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      font-weight: 500;
+      margin-left: auto;
+    }
+
+    /* 风险提示栏 (微信高对比软盒版) */
+    .risk-banner {
+      background: #fef2f2;
+      border: 1px solid rgba(239, 68, 68, 0.15);
+      border-radius: 12px;
+      padding: 18px 24px;
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+
+    .risk-banner svg {
+      width: 20px;
+      height: 20px;
+      color: var(--danger);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .risk-banner p {
+      font-size: 0.95rem;
+      color: #991b1b;
+      line-height: 1.6;
+    }
+
+    /* 高亮客观结论卡片 (精美淡色调呼出) */
+    .insight-callout {
+      background: #f8fafc;
+      border: 1px solid rgba(28, 98, 255, 0.05);
+      border-left: 4px solid var(--primary);
+      padding: 20px;
+      border-radius: 8px;
+      margin-top: 24px;
+    }
+
+    .insight-callout h5 {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #0f172a;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .insight-callout p {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* --- 模块专用组件 --- */
+
+    /* Module 1: 阅读画像 */
+    .persona-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 36px;
+    }
+
+    .persona-column {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .behavior-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .behavior-node {
+      background: #f8fafc;
+      border: 1px solid rgba(28, 98, 255, 0.03);
+      border-radius: 10px;
+      padding: 16px 18px;
+      display: flex;
+      gap: 14px;
+      transition: all 0.2s ease;
+    }
+
+    .behavior-node:hover {
+      background: #ffffff;
+      box-shadow: 0 4px 15px rgba(28, 98, 255, 0.02);
+      border-color: rgba(28, 98, 255, 0.1);
+    }
+
+    .node-indicator {
+      width: 8px;
+      height: 40px;
+      border-radius: 4px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .node-indicator.deep { background-color: var(--primary); }
+    .node-indicator.core { background-color: var(--purple); }
+    .node-indicator.shallow { background-color: var(--text-dark); }
+
+    .node-info h4 {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #0f172a;
+      margin-bottom: 4px;
+    }
+
+    .node-info p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+
+    /* Module 2: 时间轴 (微信成长轨迹) */
+    .timeline {
+      position: relative;
+      padding-left: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 3px;
+      top: 8px;
+      bottom: 8px;
+      width: 2px;
+      background: #e2e8f0;
+    }
+
+    .timeline-item {
+      position: relative;
+    }
+
+    .timeline-marker {
+      position: absolute;
+      left: -24px;
+      top: 6px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #ffffff;
+      border: 2px solid var(--text-dark);
+      transition: all 0.2s ease;
+    }
+
+    .timeline-item.active .timeline-marker {
+      width: 10px;
+      height: 8px;
+      border-color: var(--primary);
+      background: var(--primary);
+      box-shadow: 0 0 10px rgba(28, 98, 255, 0.4);
+    }
+
+    .timeline-content {
+      padding-left: 14px;
+    }
+
+    .timeline-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 6px;
+    }
+
+    .timeline-year {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: #0f172a;
+    }
+
+    .timeline-tag {
+      font-size: 0.8rem;
+      padding: 2px 8px;
+      border-radius: 4px;
+      background: #eff6ff;
+      border: 1px solid rgba(28, 98, 255, 0.08);
+      color: var(--primary);
+      font-weight: bold;
+    }
+
+    .timeline-body {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* Module 3: 知识盲区 */
+    .knowledge-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+    }
+
+    .k-box {
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 26px;
+      background: #f8fafc;
+    }
+
+    .k-box.solid { border-top: 4px solid var(--primary); }
+    .k-box.blind { border-top: 4px solid var(--danger); }
+
+    .k-header {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #0f172a;
+      margin-bottom: 18px;
+    }
+
+    .k-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .k-item {
+      padding: 12px 14px;
+      background: #ffffff;
+      border: 1px solid rgba(28, 98, 255, 0.04);
+      border-radius: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .k-item:hover {
+      box-shadow: 0 4px 12px rgba(28, 98, 255, 0.015);
+      border-color: rgba(28, 98, 255, 0.1);
+    }
+
+    .k-name { font-weight: bold; font-size: 1rem; color: #0f172a; margin-bottom: 4px; }
+    .k-desc { font-size: 0.9rem; color: var(--text-muted); line-height: 1.55; }
+
+    /* Module 4: 百分比仪表 (微信清爽胶囊) */
+    .diagnostic-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr); /* 调整为极具对称美的四宫格（2x2） */
+      gap: 20px;
+      text-align: center;
+    }
+
+    .diag-box {
+      background: #ffffff;
+      border: 1px solid rgba(28, 98, 255, 0.05);
+      border-radius: 12px;
+      padding: 24px 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.01);
+      transition: all 0.2s ease;
+    }
+
+    .diag-box:hover {
+      border-color: rgba(28, 98, 255, 0.15);
+      box-shadow: 0 6px 18px rgba(28, 98, 255, 0.03);
+    }
+
+    .diag-ring {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: conic-gradient(var(--primary) var(--percent), #f1f5f9 var(--percent));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 14px;
+      position: relative;
+    }
+
+    .diag-ring::before {
+      content: "";
+      position: absolute;
+      width: 58px;
+      height: 58px;
+      background: #ffffff;
+      border-radius: 50%;
+    }
+
+    .diag-val {
+      position: relative;
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--primary);
+    }
+
+    .diag-title {
+      font-size: 1rem;
+      font-weight: 800;
+      color: #0f172a;
+      margin-bottom: 4px;
+    }
+
+    .diag-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+
+    /* Module 5: 微信手写下划线金句 */
+    .quote-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .quote-card {
+      background: #ffffff;
+      border: 1px solid rgba(28, 98, 255, 0.05);
+      border-radius: 12px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.01);
+      transition: all 0.2s ease;
+    }
+
+    .quote-card:hover {
+      border-color: rgba(28, 98, 255, 0.15);
+      box-shadow: 0 8px 24px rgba(28, 98, 255, 0.02);
+    }
+
+    .quote-head {
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: var(--primary);
+      letter-spacing: 0.02em;
+    }
+
+    .quote-body {
+      font-size: 1rem;
+      color: #334155;
+      font-weight: 500;
+      line-height: 1.7;
+      position: relative;
+      padding-bottom: 4px;
+      /* 微信划线印记 */
+      background-image: radial-gradient(circle, var(--primary) 12%, transparent 15%);
+      background-position: 0 100%;
+      background-size: 8px 8px;
+      background-repeat: repeat-x;
+    }
+
+    .quote-source {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-top: auto;
+      padding-top: 8px;
+    }
+
+    /* Module 6: 书籍关系 */
+    .relation-network {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .network-row {
+      display: grid;
+      grid-template-columns: 1fr 60px 1fr;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .network-book {
+      background: #f8fafc;
+      border: 1px solid rgba(28, 98, 255, 0.05);
+      border-radius: 10px;
+      padding: 14px 20px;
+    }
+
+    .network-book-name { font-size: 1.05rem; font-weight: 800; color: #0f172a; }
+    .network-book-tag { font-size: 0.85rem; color: var(--text-muted); margin-top: 2px; }
+
+    .network-arrow {
+      text-align: center;
+      color: var(--primary);
+      font-weight: 800;
+      background: #eff6ff;
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto;
+      border: 1px solid rgba(28, 98, 255, 0.08);
+    }
+
+    .relation-explain {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      padding: 12px 18px;
+      background: #f8fafc;
+      border-left: 4px solid var(--primary);
+      border-radius: 0 8px 8px 0;
+      line-height: 1.6;
+    }
+
+    /* Module 7: 行动建议 */
+    .action-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .action-box {
+      border: 1px solid rgba(28, 98, 255, 0.05);
+      border-radius: 12px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      background: #ffffff;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.01);
+      transition: all 0.2s ease;
+    }
+
+    .action-box:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(28, 98, 255, 0.03);
+    }
+
+    .action-badge {
+      font-size: 0.85rem;
+      font-weight: 800;
+      padding: 2px 8px;
+      border-radius: 50px;
+      width: fit-content;
+    }
+
+    .action-box:nth-child(1) .action-badge { background: #eff6ff; color: var(--primary); }
+    .action-box:nth-child(2) .action-badge { background: #f5f3ff; color: var(--purple); }
+    .action-box:nth-child(3) .action-badge { background: #ecfdf5; color: var(--secondary); }
+    .action-box:nth-child(4) .action-badge { background: #fffbeb; color: var(--accent); }
+
+    .action-title-lbl {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: #0f172a;
+    }
+
+    .action-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .action-item {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      position: relative;
+      padding-left: 12px;
+      line-height: 1.55;
+    }
+
+    .action-item::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: var(--primary);
+      font-weight: bold;
+    }
+
+    /* Module 8: 选题列表 */
+    .table-wrapper {
+      width: 100%;
+      overflow-x: auto;
+      border: 1px solid rgba(28, 98, 255, 0.08);
+      border-radius: 12px;
+    }
+
+    .topic-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.95rem;
+    }
+
+    .topic-table th {
+      background: #eff6ff;
+      border-bottom: 1.5px solid rgba(28, 98, 255, 0.15);
+      padding: 14px 18px;
+      color: #1e3a8a;
+      font-weight: 800;
+    }
+
+    .topic-table td {
+      border-bottom: 1px solid rgba(28, 98, 255, 0.04);
+      padding: 14px 18px;
+      color: var(--text-main);
+      line-height: 1.55;
+    }
+
+    .topic-table tr:hover {
+      background: #f8fafc;
+    }
+
+    .topic-badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: bold;
+    }
+    .topic-badge.hot { background: #fff7ed; color: var(--accent); border: 1px solid rgba(217,119,6,0.15); }
+    .topic-badge.deep { background: #faf5ff; color: var(--purple); border: 1px solid rgba(124,58,237,0.15); }
+
+    /* Module 9: 缺失类型 */
+    .gap-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .gap-card {
+      background: #ffffff;
+      border: 1px solid rgba(28, 98, 255, 0.05);
+      border-radius: 12px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.01);
+    }
+
+    .gap-priority {
+      font-size: 0.85rem;
+      font-weight: bold;
+      padding: 2px 10px;
+      border-radius: 50px;
+      width: fit-content;
+    }
+    .gap-priority.high { background: #fef2f2; color: var(--danger); border: 1px solid rgba(239,68,68,0.15); }
+    .gap-priority.medium { background: #fffbeb; color: var(--accent); border: 1px solid rgba(217,119,6,0.15); }
+    .gap-priority.low { background: #ecfdf5; color: var(--secondary); border: 1px solid rgba(5,150,105,0.15); }
+
+    .gap-title {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: #0f172a;
+    }
+
+    .gap-body {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* Module 10: 补给书架 */
+    .rec-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .rec-item {
+      background: #f8fafc;
+      border: 1px solid rgba(28, 98, 255, 0.03);
+      border-radius: 12px;
+      padding: 20px 24px;
+      display: grid;
+      grid-template-columns: 90px 1.5fr 2fr;
+      align-items: center;
+      gap: 24px;
+      transition: all 0.2s ease;
+    }
+
+    .rec-item:hover {
+      background: #ffffff;
+      border-color: rgba(28, 98, 255, 0.15);
+      box-shadow: 0 8px 24px rgba(28, 98, 255, 0.03);
+    }
+
+    .rec-type-badge {
+      height: 38px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      font-weight: bold;
+      border: 1px solid rgba(28, 98, 255, 0.08);
+      background: #eff6ff;
+      color: var(--primary);
+    }
+
+    .rec-target {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .rec-name { font-weight: 800; font-size: 1.05rem; color: #0f172a; }
+    .rec-source { font-size: 0.85rem; color: var(--text-muted); }
+
+    .rec-reason {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+
+    /* --- 最终研判结论 (微信官方高调研判卡) --- */
+    .verdict-box {
+      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+      border: 1px solid #334155;
+      border-radius: 16px;
+      padding: 40px;
+      color: #ffffff;
+      box-shadow: 0 15px 40px rgba(15, 23, 42, 0.2);
+    }
+
+    .verdict-title {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: #38bdf8;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .verdict-list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .verdict-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+
+    .verdict-num {
+      width: 22px;
+      height: 22px;
+      border-radius: 6px;
+      background: #38bdf8;
+      color: #0f172a;
+      font-weight: 800;
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 3px;
+    }
+
+    .verdict-text {
+      font-size: 1rem;
+      color: #cbd5e1;
+      line-height: 1.65;
+    }
+
+    .verdict-text strong {
+      color: #ffffff;
+    }
+
+    /* 页脚与免责 */
+    .footer {
+      text-align: center;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .footer-divider {
+      height: 1px;
+      background: rgba(28, 98, 255, 0.08);
+      margin: 24px 0;
+    }
+
+    .disclaimer-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      text-align: left;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      border-top: 1px dashed rgba(28, 98, 255, 0.15);
+      padding-top: 24px;
+    }
+
+    .disclaimer-box h6 {
+      color: var(--primary);
+      margin-bottom: 6px;
+      font-weight: 800;
+    }
+
+    /* --- 微信卡面板：电脑/手机端视图切换控制台 --- */
+    .view-control-panel {
+      position: fixed;
+      top: 24px;
+      right: 24px;
+      z-index: 10000;
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(28, 98, 255, 0.15);
+      border-radius: 12px;
+      padding: 12px;
+      box-shadow: 0 10px 30px rgba(28, 98, 255, 0.08);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      width: 190px;
+    }
+
+    .view-control-title {
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-bottom: 1px solid rgba(28, 98, 255, 0.08);
+      padding-bottom: 6px;
+      margin-bottom: 2px;
+    }
+
+    .view-btn {
+      background: #f8fafc;
+      border: 1px solid rgba(28, 98, 255, 0.04);
+      color: var(--text-muted);
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .view-btn:hover {
+      background: #eff6ff;
+      color: var(--primary);
+    }
+
+    .view-btn.active {
+      background: var(--primary-gradient);
+      color: #ffffff;
+      border-color: var(--primary);
+      box-shadow: 0 4px 12px rgba(28, 98, 255, 0.25);
+    }
+
+    @media print {
+      .view-control-panel {
+        display: none !important;
+      }
+    }
+
+    /* --- 📱 手机视图覆盖样式 (手机端完美重构) --- */
+    body.phone-mode-active {
+      padding: 24px 10px !important;
+      background-image: none !important;
+      background-color: var(--bg-color) !important;
+    }
+
+    body.phone-mode-active .container {
+      max-width: 430px !important;
+      gap: 20px !important;
+      padding-bottom: 40px !important;
+    }
+
+    body.phone-mode-active .card, 
+    body.phone-mode-active .verdict-box, 
+    body.phone-mode-active .hero-banner {
+      padding: 24px 18px !important;
+      border-radius: 12px !important;
+    }
+
+    body.phone-mode-active .hero-title {
+      font-size: 1.8rem !important;
+      line-height: 1.25 !important;
+    }
+
+    body.phone-mode-active .hero-desc {
+      font-size: 0.9rem !important;
+    }
+
+    body.phone-mode-active .section-title {
+      flex-direction: column !important;
+      align-items: flex-start !important;
+      gap: 8px !important;
+    }
+
+    body.phone-mode-active .section-title span.subtitle {
+      margin-left: 0 !important;
+      width: 100% !important;
+    }
+
+    body.phone-mode-active .summary-grid,
+    body.phone-mode-active .persona-layout,
+    body.phone-mode-active .knowledge-layout,
+    body.phone-mode-active .quote-grid,
+    body.phone-mode-active .action-grid,
+    body.phone-mode-active .gap-grid,
+    body.phone-mode-active .disclaimer-grid,
+    body.phone-mode-active .rec-item {
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 16px !important;
+    }
+
+    body.phone-mode-active .diagnostic-grid {
+      display: grid !important;
+      grid-template-columns: repeat(2, 1fr) !important;
+      gap: 12px !important;
+    }
+
+    body.phone-mode-active .data-spec-card {
+      grid-template-columns: 1fr !important;
+      gap: 12px !important;
+    }
+
+    body.phone-mode-active .diag-ring {
+      width: 60px !important;
+      height: 60px !important;
+    }
+
+    body.phone-mode-active .diag-ring::before {
+      width: 48px !important;
+      height: 48px !important;
+    }
+
+    body.phone-mode-active .diag-val {
+      font-size: 0.85rem !important;
+    }
+
+    body.phone-mode-active .diag-title {
+      font-size: 0.8rem !important;
+    }
+
+    body.phone-mode-active .rec-item {
+      grid-template-columns: 1fr !important;
+      text-align: left !important;
+    }
+
+    body.phone-mode-active .rec-type-badge {
+      width: fit-content !important;
+      padding: 2px 10px !important;
+    }
+
+    body.phone-mode-active p, 
+    body.phone-mode-active li, 
+    body.phone-mode-active td {
+      font-size: 0.9rem !important;
+      line-height: 1.6 !important;
+    }
+
+    /* --- 专项 PDF 打印排版阻断 --- */
+    @media print {
+      html, body {
+        background-color: #f4f8fb !important;
+        color: #1e293b !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+
+      .container {
+        max-width: 100% !important;
+        width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        gap: 24px !important;
+      }
+
+      @page {
+        margin: 15mm 12mm 15mm 12mm;
+      }
+
+      /* 允许大型容器在页面之间正常折页，不再强行强制单页避断，从而彻底解决大型空白页或标题/内容分离的尴尬问题 */
+      .card, .verdict-box, .table-wrapper {
+        margin-bottom: 20px !important;
+        border: 1px solid rgba(28, 98, 255, 0.12) !important;
+        background-color: #ffffff !important;
+      }
+
+      /* 核心标题防孤立：防止章节标题被切断放在上一页页尾，强制它与紧随其后的内容保持在同一页 */
+      .section-title, .verdict-title {
+        page-break-after: avoid !important;
+        break-after: avoid !important;
+      }
+
+      /* 针对较小原子化内容块进行避断保护：防止单个记录、单行表格、推荐卡片或小模块本身被切断成两半 */
+      .rec-item, .quote-card, .behavior-node, .k-box, .gap-card, .disclaimer-box, .summary-box, .action-box, .timeline-item, .verdict-item, .topic-table tr, .data-spec-card, .risk-banner {
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+      }
+
+      .persona-layout, .knowledge-layout, .summary-grid, .quote-grid, .action-grid, .gap-grid, .disclaimer-grid {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 16px !important;
+      }
+
+      /* 诊断模块在打印和手机模式下强制维持高信息密度的四宫格（2x2）排版，大幅度压缩纵向占位 */
+      .diagnostic-grid {
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 16px !important;
+      }
+
+      .spec-item span {
+        display: inline !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+
+    <!-- 1. HERO 头部横幅 (青出于蓝版) -->
+    <div class="hero-banner">
+      <div class="report-meta">WECHAT READ COGNITIVE & STUDY REPORT</div>
+      
+      <!-- 读者账号专属卡片 -->
+      <div class="reader-profile">
+        <div class="reader-info">
+          <div class="reader-nickname-row">
+            <span class="reader-name">一个笔袋</span>
+          </div>
+          <p class="reader-bio">“一个兴趣使然的人 | 「走起来是十分，飞起来也是八分」”</p>
+          <div class="reader-meta-row">
+            <span>数据置信度：极其充分</span>
+            <span class="divider">|</span>
+            <span>已陪伴微信读书：4000 天</span>
+          </div>
+        </div>
+      </div>
+
+      <h1 class="hero-title">微信读书 · 个人认知结构与深度阅读研究报告</h1>
+      <p class="hero-desc">
+        本报告基于 2015 年 6 月 17 日注册至今、跨越近 11 年（长达 4000 天）的微信读书全量行为数据。通过对累计 1108 小时阅读心流、8760 条高密度想法和笔记聚类、以及 2026 年最新有声变迁（听书率达 68%）的客观计量分析，旨在排除主观感知偏差，勾勒出高度结构化、去滤镜的个人心智带宽分配与底层思考图盘。
+      </p>
+
+      <!-- 首页高亮：分析摘要 (Executive Summary) -->
+      <div class="summary-grid">
+        <div class="summary-box">
+          <span class="label">阅读主轴</span>
+          <span class="val">虚构叙事构筑与心智自省双极</span>
+          <span class="desc">在深度虚构世界中沉浸停留，辅以正念哲学、心理自省进行长效自我认知调频。</span>
+        </div>
+        <div class="summary-box">
+          <span class="label">最近兴趣变化</span>
+          <span class="val">伴随式有声介质大比例接管</span>
+          <span class="desc">2026年听书占比攀升至68%，长篇单点文字阅读向移动、零碎场景的有声听书倾斜。</span>
+        </div>
+        <div class="summary-box">
+          <span class="label">深读程度特征</span>
+          <span class="val">高段高密旁批与浅层收藏并存</span>
+          <span class="desc">对核心虚构作品展现出近乎偏执的细致精读，但在高难度非虚构类目中常有未读完搁置。</span>
+        </div>
+        <div class="summary-box">
+          <span class="label">知识结构定位</span>
+          <span class="val">美学人文学科富集，商业数理匮乏</span>
+          <span class="desc">拥有极其敏锐的嵌套叙事直觉与战术推演逻辑，但在微观商业逻辑和硬技术工程领域偏枯。</span>
+        </div>
+        <div class="summary-box">
+          <span class="label">当前明显盲区</span>
+          <span class="val">微观经济运转与落地实践转化</span>
+          <span class="desc">心智偏重对抽象概念、完美逻辑链的审美 and 反思，缺乏复杂现实博弈和项目推进转化工具。</span>
+        </div>
+        <div class="summary-box">
+          <span class="label">最值得补充方向</span>
+          <span class="val">现代系统论与主动反脆弱机制</span>
+          <span class="desc">建议补齐以《系统之美》、《反脆弱》等为代表的非虚构系统化工具，中和文学防守姿态。</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 数据源与样本质量说明模块 -->
+    <div class="data-spec-card">
+      <div class="spec-item">
+        <div class="spec-lbl">数据时间跨度</div>
+        <div class="spec-val">4000 天 <span>(2015 - 2026)</span></div>
+      </div>
+      <div class="spec-item">
+        <div class="spec-lbl">12个月数据质量</div>
+        <div class="spec-val">极其充分 <span>(41h / 90天活跃)</span></div>
+      </div>
+      <div class="spec-item">
+        <div class="spec-lbl">高信度完整字段</div>
+        <div class="spec-val">总时长、笔记数、时段、有声率</div>
+      </div>
+      <div class="spec-item">
+        <div class="spec-lbl">推论置信度评级</div>
+        <div class="spec-val" style="color: var(--secondary);">中高 <span>(基于8760条行为标注)</span></div>
+      </div>
+    </div>
+
+    <!-- 认知失衡与潜在危害警示 -->
+    <div class="risk-banner">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+        <line x1="12" y1="9" x2="12" y2="13"></line>
+        <line x1="12" y1="17" x2="12.01" y2="17"></line>
+      </svg>
+      <div>
+        <p>
+          <strong>客观失衡诊断：</strong>高标记密度（8760 条笔记）高度浓缩于幻想叙事作品（如《将夜》单本承载 795 条），而宏观社会学、硬核科技及具体变现工具类阅读表现较为边缘。这一长期行为倾向可能在产品决策和日常工作中表现为<strong>“推演逻辑严密无缝、底层概念极其深邃，但由于微观经济学 and 实操博弈模型的匮乏，方案容易陷入难以落地的乌托邦陷阱”</strong>，并可能在现实压力前倾向于以哲学自省（《清醒地活》）替代实质性对抗，需要引起注意。
+        </p>
+      </div>
+    </div>
+
+    <!-- Module 1: 阅读画像 -->
+    <div class="card">
+      <h2 class="section-title"><span class="title-main"><span class="section-no">01</span>阅读画像</span><span class="subtitle">叙事心流与觉察自省的双极模型</span></h2>
+      <div class="persona-layout">
+        <div class="persona-column">
+          <h3 style="font-size: 1rem; color: var(--text-main); margin-bottom: 8px;">📊 行为表现与象限映射</h3>
+          <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6;">
+            分析全量行为样本，您的阅读习惯并非线性分布，而是呈现出极其清晰的“双极拉扯”结构。两极之间，构成了深度心理代偿与防御性缓冲。
+          </p>
+          <div class="behavior-list">
+            <div class="behavior-node">
+              <div class="node-indicator deep"></div>
+              <div class="node-info">
+                <h4>1. 极深沉浸区：《将夜》（单本耗时 82小时23分钟，笔记795条）</h4>
+                <p>在宏大而自洽的世界观设定中，您的直觉共情与多线索解构展现出高度活跃。阅读不仅是消遣，更构成了一种深度的替代性体验。</p>
+              </div>
+            </div>
+            <div class="behavior-node">
+              <div class="node-indicator core"></div>
+              <div class="node-info">
+                <h4>2. 长效思想锚点：《清醒地活》（读了5年，分享64次）</h4>
+                <p>非虚构维度的精神底座。该书具有极其稳定的功能性——每当面临现实不确定性，您倾向于以此作为心智解脱和脱钩的缓冲机制。</p>
+              </div>
+            </div>
+            <div class="behavior-node">
+              <div class="node-indicator shallow"></div>
+              <div class="node-info">
+                <h4>3. 低阻力逃避出口：《根西岛文学》等近期治愈读物</h4>
+                <p>近期保持 2 小时的治愈类阅读，多属于在精力高频消耗下、在不愿承担认知负荷时所寻求的轻量化情绪代偿。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="persona-column">
+          <h3 style="font-size: 1rem; color: var(--text-main); margin-bottom: 8px;">🧠 模式解析：主被动心流的张力</h3>
+          <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 12px;">
+            从已有样本表现来看，您在虚构和灵性学科领域的阅读具有高度的<strong>“主动心流特征”</strong>：您不仅单次持续时间极长（最沉浸时达 6 小时），且伴随海量的标记输出，倾向于在安全的文字框架中寻找对复杂现实的反弹与投影。
+          </p>
+          <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 12px;">
+            相反，在偏重实操 and 技能的书籍中（例如《狙击手》33天仅读 45%），则呈现出较强的<strong>“被动防御/高阻力特征”</strong>。此类书籍通常是由于认知焦虑被加入书架，但在试图进行深度吸收时，由于缺乏足够的情感反馈和心流代偿，阅读容易中断或被无限拉长。
+          </p>
+          <div class="insight-callout">
+            <h5>💡 阶段性研判结论</h5>
+            <p>您的阅读在实质上发挥了“精神过滤与心智调频”的功能：依托逻辑极其严谨的虚构作品及超然哲理，在内心建立起不易被外界侵扰的精神堡垒，以对冲商业社会的琐碎与焦虑。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Module 2: 阅读兴趣变化 -->
+    <div class="card">
+      <h2 class="section-title"><span class="title-main"><span class="section-no">02</span>阅读兴趣变迁</span><span class="subtitle">从纯文字逃避到日常有声伴随的十年演进</span></h2>
+      <div class="timeline">
+        
+        <div class="timeline-item">
+          <div class="timeline-marker"></div>
+          <div class="timeline-content">
+            <div class="timeline-header">
+              <span class="timeline-year">2015 - 2017 阶段</span>
+              <span class="timeline-tag">起点与大众IP</span>
+            </div>
+            <div class="timeline-body">
+              2015年6月注册，2016年8月开始阅读《哈利·波特与被诅咒的孩子》。此阶段阅读范围较狭窄，基本停留在外部流行IP的被动输入状态。
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-marker"></div>
+          <div class="timeline-content">
+            <div class="timeline-header">
+              <span class="timeline-year">2018 - 2021 阶段</span>
+              <span class="timeline-tag">多线嵌套审美培育</span>
+            </div>
+            <div class="timeline-body">
+              阅读时长进入 40-100 小时区间。此时对伊坂幸太郎（12本）、阿加莎等推理作家的偏爱逐渐显性化。对复杂嵌套结构、伏笔及宿命感的敏感度在此阶段得到了深度培育。
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item active">
+          <div class="timeline-marker"></div>
+          <div class="timeline-content">
+            <div class="timeline-header">
+              <span class="timeline-year">2022 年</span>
+              <span class="timeline-tag" style="color: var(--accent); border-color: rgba(217, 119, 6, 0.2);">🏆 精神爆发峰值 (203h)</span>
+            </div>
+            <div class="timeline-body">
+              阅读时长达到历史最高的 203 小时。极度沉浸于宏大设定网文，并在内心深处引入《清醒地活》作为自省内核。推测极可能伴随着当时现实秩序或外界环境的剧烈变动，阅读在此刻作为最坚实的精神避风港被高频征用。
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-marker"></div>
+          <div class="timeline-content">
+            <div class="timeline-header">
+              <span class="timeline-year">2023 - 2025 阶段</span>
+              <span class="timeline-tag">写实切入与沉淀</span>
+            </div>
+            <div class="timeline-body">
+              阅读时间稳定在 140 小时左右。阅读范围开始向非虚构硬核历史纪实（如科尼利厄斯·瑞恩《遥远的桥》3本）及严肃文学（石黑一雄 6本）迁移，标志着品味由纯粹的超现实逃避转向客观世界物理规律的思索。
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item active">
+          <div class="timeline-marker"></div>
+          <div class="timeline-content">
+            <div class="timeline-header">
+              <span class="timeline-year">2026 年（当下）</span>
+              <span class="timeline-tag" style="color: var(--secondary); border-color: rgba(5, 150, 105, 0.2);">🔊 介质巨变：伴随式有声有轨接管 (听书率 68%)</span>
+            </div>
+            <div class="timeline-body">
+              2026年日均阅读时间约 17 分钟，但<strong>有声听书比例骤升至 68%</strong>。这一显著趋势表明，在快节奏的现实中，您的阅读已大面积在“做家务、通勤、散步”等零碎、被动伴随场景下发生，偏爱历史类如《伊朗五百年》（已精读 7 小时）。
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Module 3: 知识结构与盲区 -->
+    <div class="card">
+      <h2 class="section-title"><span class="title-main"><span class="section-no">03</span>知识结构与盲区诊断</span><span class="subtitle">丰厚的人文心智底座与高阶逻辑偏枯</span></h2>
+      <div class="knowledge-layout">
+        
+        <div class="k-box solid">
+          <div class="k-header">
+            <span style="color: var(--primary);">🏰 高度稳定的人文与美学堡垒</span>
+          </div>
+          <div class="k-list">
+            <div class="k-item">
+              <div class="k-name">1. 叙事解构与嵌套逻辑（美学/文学：330+ 小时）</div>
+              <div class="k-desc">对伊坂幸太郎（12本）、石黑一雄（6本）、藤萍（2本）等作品的高度沉淀，赋予您极佳的多线线索咬合与行为动机还原能力。</div>
+            </div>
+            <div class="k-item">
+              <div class="k-name">2. 精神脱钩与内在自省（心理/灵性：100+ 小时）</div>
+              <div class="k-desc">通过对《清醒地活》长达 5 年的内省式慢读和 64 次分享，形成了一套趋于成熟的“将自我抽离为第三视角进行观察”的精神过滤回路。</div>
+            </div>
+            <div class="k-item">
+              <div class="k-name">3. 微观博弈战术复盘（战史/地缘：100+ 小时）</div>
+              <div class="k-desc">精读《遥远的桥》与正在精听《伊朗五百年》。对复杂多线计划的崩溃、信息传递衰减以及局部组织博弈具有极其硬核的推演兴趣。</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="k-box blind">
+          <div class="k-header">
+            <span style="color: var(--danger);">⚠️ 亟待补充与中和的现实盲区</span>
+          </div>
+          <div class="k-list">
+            <div class="k-item">
+              <div class="k-name">1. 真实商业规则与微观经济学（空缺度：极高）</div>
+              <div class="k-desc">缺乏关于资本底层运转、组织激励机制、宏观经济周期的非虚构系统化工具，这限制了您对社会日常经济博弈的深度透视。</div>
+            </div>
+            <div class="k-item">
+              <div class="k-name">2. 硬核数理逻辑与前沿工程（空缺度：极高）</div>
+              <div class="k-desc">极少涉猎前沿人工智能（如2026年当下AI变革）、系统科学、统计学和现实数据科学，主要通过《三体》等虚构科幻对前沿科技进行概念性观望。</div>
+            </div>
+            <div class="k-item">
+              <div class="k-name">3. 实操方法论与公开输出路径（空缺度：高）</div>
+              <div class="k-desc">高达 8,760 条的标记大多锁死在私密账户中，并未建立成熟的外部输出变现体系。存在明显的“信息高溢出、落地低转化”心智堵塞。</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Module 4: 阅读质量诊断 -->
+    <div class="card">
+      <h2 class="section-title"><span class="title-main"><span class="section-no">04</span>阅读质量与心智机制诊断</span><span class="subtitle">8,760 条旁批背后的心智分配透视</span></h2>
+      <div class="diagnostic-grid">
+        
+        <div class="diag-box">
+          <div class="diag-ring" style="--percent: 60%;">
+            <div class="diag-val">60%</div>
+          </div>
+          <div class="diag-title">叙事性心流躲避</div>
+          <div class="diag-desc">在绝对掌控的世界观中，实现高密度的思考代偿</div>
+        </div>
+
+        <div class="diag-box">
+          <div class="diag-ring" style="--percent: 20%; background: conic-gradient(var(--purple) 20%, #f1f5f9 20%);">
+            <div class="diag-val" style="color: var(--purple);">20%</div>
+          </div>
+          <div class="diag-title">精神状态调频</div>
+          <div class="diag-desc">借助深层心理学，建立起不被现实干预的防御壁垒</div>
+        </div>
+
+        <div class="diag-box">
+          <div class="diag-ring" style="--percent: 15%; background: conic-gradient(var(--secondary) 15%, #f1f5f9 15%);">
+            <div class="diag-val" style="color: var(--secondary);">15%</div>
+          </div>
+          <div class="diag-title">理性纪实推盘</div>
+          <div class="diag-desc">通过非虚构微观战史，模拟高信息噪音下的策略演演练</div>
+        </div>
+
+        <div class="diag-box">
+          <div class="diag-ring" style="--percent: 5%; background: conic-gradient(var(--danger) 5%, #f1f5f9 5%);">
+            <div class="diag-val" style="color: var(--danger);">5%</div>
+          </div>
+          <div class="diag-title">焦虑收藏代偿</div>
+          <div class="diag-desc">由于现实问题衍生出的被动、低效率的储备行为</div>
+        </div>
+
+      </div>
+      <div class="insight-callout" style="margin-top: 24px;">
+        <h5>🩺 诊断透视：客观厘清“知识幻觉”与“心智代偿”</h5>
+        <p>
+          数据更支持这样的判断：您并非单纯的休闲型散步阅读，而是一个<strong>“有着极度倾诉欲与复盘意愿的隐性思考者”</strong>。8,760 条的想法总量，表明您每小时的平均产出极其惊人。然而，这一极度活跃的思考机制目前几乎 90% 集中于虚构类的“旁批”中。
+          在虚拟设定中与作者争论高下，虽然能在瞬间为您提供充沛的智力爽感与成就感，但在客观层面上，这是一种**高效而安全的认知代偿**。它将您极强的分析推演能力，温柔地阻断在虚构世界内部，消解了您将这些观点真正整理为结构化文章、产品逻辑，并在粗糙无情的现实商业世界中进行冷酷变现与碰撞的主动性。
+        </p>
+      </div>
+    </div>
+
+    <!-- Module 5: 高价值内容提炼 -->
+    <div class="card">
+      <h2 class="section-title"><span class="title-main"><span class="section-no">05</span>核心观念提炼</span><span class="subtitle">潜意识中反复在意的四大思辨母题</span></h2>
+      <div class="quote-grid">
+        
+        <div class="quote-card">
+          <div class="quote-head">母题 1 ｜ 个人意志对刚性法则的对抗</div>
+          <div class="quote-body">
+            纵使昊天定下不可逆的规则，人亦要在黑夜中，燃尽自身，选择逆天改命。
+          </div>
+          <div class="quote-source">
+            —— 基于 《将夜》宁缺宿命对抗笔记 提炼
+          </div>
+        </div>
+
+        <div class="quote-card">
+          <div class="quote-head" style="color: var(--purple);">母题 2 ｜ 抽离的旁观者对负面能量的流经</div>
+          <div class="quote-body" style="background-image: radial-gradient(circle, var(--purple) 12%, transparent 15%);">
+            向内看，允许一切情绪流经你，那个感到痛苦的观察者才是真实的。
+          </div>
+          <div class="quote-source" style="color: var(--purple);">
+            —— 基于 《清醒地活》情绪控制法 提炼
+          </div>
+        </div>
+
+        <div class="quote-card">
+          <div class="quote-head" style="color: var(--secondary);">母题 3 ｜ 完美逻辑系统在局部偶然下的坍塌</div>
+          <div class="quote-body" style="background-image: radial-gradient(circle, var(--secondary) 12%, transparent 15%);">
+            即使最完美的策划和宏大计划，在微小偶发细节面前也会彻底分崩离析。
+          </div>
+          <div class="quote-source" style="color: var(--secondary);">
+            —— 基于 《遥远的桥》与《三体》系统分析 提炼
+          </div>
+        </div>
+
+        <div class="quote-card">
+          <div class="quote-head" style="color: var(--accent);">母题 4 ｜ 认知失控边缘对真实现实的死守</div>
+          <div class="quote-body" style="background-image: radial-gradient(circle, var(--accent) 12%, transparent 15%);">
+            在世界彻底崩塌和疯狂感官投影中，拼尽全力死守唯一的真实。
+          </div>
+          <div class="quote-source" style="color: var(--accent);">
+            —— 基于 《道诡异仙》李火旺意识解析 提炼
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Module 6: 书籍关系分析 -->
+    <div class="card">
+      <h2 class="section-title"><span class="title-main"><span class="section-no">06</span>书籍关系分析</span><span class="subtitle">隐性认知演进主线：寻找抗脆弱的锚点</span></h2>
+      <div class="relation-network">
+        
+        <div class="network-row">
+          <div class="network-book">
+            <div class="network-book-name">《清醒地活》 (灵性哲学)</div>
+            <div class="network-book-tag">唯灵观 ｜ 超然与抽离 ｜ 允许一切流经</div>
+          </div>
+          <div class="network-arrow">VS</div>
+          <div class="network-book" style="border-color: rgba(239, 68, 68, 0.15);">
+            <div class="network-book-name" style="color: var(--danger);">《道诡异仙》 (幻想网文)</div>
+            <div class="network-book-tag">唯心观 ｜ 极度卷入 ｜ 在痛苦与疯狂中死守</div>
+          </div>
+        </div>
+        <div class="relation-explain">
+          <strong>【底层对立与平衡】</strong> 这两本书共同回应着您内心深处关于<strong>“精神痛苦的根源与抗击”</strong>的命题。《清醒地活》代表您极力寻求的、通过绝对抽离来实现精神自由的理想模型；而《道诡异仙》则是您在现实压力下，感官极度卷入疯狂痛苦、但又必须在混乱中咬牙死守自我的极端自况。您在“彻底冷眼旁观”与“彻底卷入抵抗”之间，形成了一种极其微妙的心智动态拉锯。
+        </div>
+
+        <div class="network-row">
+          <div class="network-book" style="border-color: rgba(217, 119, 6, 0.15);">
+            <div class="network-book-name" style="color: var(--accent);">《易经》 (东方周期)</div>
+            <div class="network-book-tag">宏观框架 ｜ 阴阳交泰 ｜ 一统规律生克演化</div>
+          </div>
+          <div class="network-arrow">🤝</div>
+          <div class="network-book" style="border-color: rgba(28, 98, 255, 0.15);">
+            <div class="network-book-name" style="color: var(--primary);">《三体》/《遥远的桥》 (西方推演)</div>
+            <div class="network-book-tag">微观机制 ｜ 策略多线演替 ｜ 系统无情溃败</div>
+          </div>
+        </div>
+        <div class="relation-explain">
+          <strong>【宏微观推进机制】</strong> 这两组书籍代表您对<strong>“混沌系统演进规律”</strong>的追寻。《易经》为您提供了一种宏观、抽象、东方静态周期的心智定力，帮助您相信一切皆有循环；而《三体全集》和《遥远的桥》则代表西方理性科学中，对不可逆系统走向无序 and 多变量局部博弈的精密复盘。二者互补，展现了您试图超越局部的直觉，构筑可容纳庞大变量的、大一统战略规律框架。
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Module 7: 行动建议 -->
+    <div class="card">
+      <h2 class="section-title"><span class="title-main"><span class="section-no">07</span>实践落地策略建议</span><span class="subtitle">可尝试的下一步心智调整动作</span></h2>
+      <div class="action-grid">
+        
+        <div class="action-box">
+          <span class="action-badge">💼 1. 工作决策</span>
+          <span class="action-title-lbl">项目建立“抗震缓冲”</span>
+          <ul class="action-list">
+            <li class="action-item">借鉴《遥远的桥》中蒙哥马利计划因通信和微小战术偏差导致崩溃的教训。</li>
+            <li class="action-item">在跨部门沟通和外部高度依赖节点，主动降低 30% 完美预期，预留 2 周的物理缓冲期。</li>
+          </ul>
+        </div>
+
+        <div class="action-box">
+          <span class="action-badge">🌱 2. 个人成长</span>
+          <span class="action-title-lbl">从被动吸收转向输出机制</span>
+          <ul class="action-list">
+            <li class="action-item">尝试建立“网文旁批限额制”。看小说时只作审美，将高频思考带宽转移到非虚构复盘中。</li>
+            <li class="action-item">结合《清醒地活》的观察者法，每天下班前进行 5 分钟的客观行为记录，拆解自己的对抗倾向。</li>
+          </ul>
+        </div>
+
+        <div class="action-box">
+          <span class="action-badge">✍️ 3. 表达写作</span>
+          <span class="action-title-lbl">打碎私密容器公开发行</span>
+          <ul class="action-list">
+            <li class="action-item">将 8760 条私密笔记碎片化拆解，提取当中关于“社会、规则、宿命”的深度分析。</li>
+            <li class="action-item">尝试以每周一更的方式，在小红书、微信等公开平台建立个人专栏，强迫接受客观现实的低信噪比反馈。</li>
+          </ul>
+        </div>
+
+        <div class="action-box">
+          <span class="action-badge">💻 4. 产品思考</span>
+          <span class="action-title-lbl">解构“狂热崇拜与身份认同”</span>
+          <ul class="action-list">
+            <li class="action-item">深度拆解《诡秘之主》22条晋升途径中极度精密的“扮演法与心智改变模型”。</li>
+            <li class="action-item">可尝试将这套通过行为反复改变用户自定位的机制，抽象复用到现实产品体系的成长机制中。</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Module 8: 选题建议 -->
+    <div class="card">
+      <h2 class="section-title"><span class="title-main"><span class="section-no">08</span>高传播力选题孵化库</span><span class="subtitle">基于8,760条旁批的思想社会化实验</span></h2>
+      <div class="table-wrapper">
+        <table class="topic-table">
+          <thead>
+            <tr>
+              <th style="width: 25%;">选题方向 ｜ 小红书/文章 拟标题</th>
+              <th style="width: 12%;">属性属性</th>
+              <th style="width: 38%;">核心破局观点（不落俗套）</th>
+              <th style="width: 25%;">思想佐证与引用来源</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>《从〈将夜〉的795条笔记，聊聊普通人如何面对不可战胜的“昊天”》</strong></td>
+              <td><span class="topic-badge hot">职场爆款</span></td>
+              <td>将“昊天”隐喻为不可抗拒的社会大势与行业衰退。不谈鸡汤，拆解宁缺如何在规则死角处通过极致的实用主义与冷酷执行力，寻找个体尊严。</td>
+              <td>《将夜》宁缺逆天改命设定 + 《清醒地活》能量守恒</td>
+            </tr>
+            <tr>
+              <td><strong>《打工人的精神分裂：白天〈清醒地活〉，晚上〈道诡异仙〉》</strong></td>
+              <td><span class="topic-badge hot">情感共鸣</span></td>
+              <td>剖析现代职场人的心理双轨制。一方面在虚幻的公司KPI中被迫配合表演（道诡的疯狂现实），一方面又需要在下班后退回到灵魂的极度寂静和脱钩中（清醒地活）。</td>
+              <td>《清醒地活》+ 《道诡异仙》李火旺的心智投影对比</td>
+            </tr>
+            <tr>
+              <td><strong>《世界正在走向无法预测的“三体”：为什么说〈易经〉是人类最早的系统论？》</strong></td>
+              <td><span class="topic-badge deep">知识硬核</span></td>
+              <td>东方古老全息占卜不是迷信，它本质上与西方混沌理论、三体物理模型一致，都是在承认“不可预测性”的前提下寻找演化阻力最小的平衡周期。</td>
+              <td>《易经》生克演化 + 《三体全集》乱纪元数学模型</td>
+            </tr>
+            <tr>
+              <td><strong>《为什么世界上最完美的“战术策划”，往往死于前线微不足道的5分钟？》</strong></td>
+              <td><span class="topic-badge deep">管理干货</span></td>
+              <td>拆解二战市场花园行动，警示产品经理与管理者：在办公室里做出的顶层设计，往往在跟现实接触的第一秒崩溃。建立项目冗余而非追求无瑕计划。</td>
+              <td>《遥远的桥》蒙哥马利计划的战役细节破产复盘</td>
+            </tr>
+            <tr>
+              <td><strong>《读了6本书我才明白：石黑一雄如何用“温柔的遗忘”治愈现代人的高压内耗？》</strong></td>
+              <td><span class="topic-badge">文艺治愈</span></td>
+              <td>纠结于过往的创伤是毫无意义的。石黑一雄的作品揭示，遗忘有时是生命系统在面对毁灭性真相时的一种“极其精密的防御性自我保护机制”。</td>
+              <td>《石黑一雄》作品群（如《长日将尽》、《被掩埋的巨人》）</td>
+            </tr>
+            <tr>
+              <td><strong>《爆款网文〈诡秘之主〉背后的22条途径：其实是一套极其顶级的用户裂变模型》</strong></td>
+              <td><span class="topic-badge hot">产品搞钱</span></td>
+              <td>从产品运营视角硬核解构诡秘的晋升扮演法。扮演法本质上是“通过行为反馈改变用户心智身份，从而高频提高粘性与留存”的超级心理学机制。</td>
+              <td>《诡秘之主》“扮演法”与序列升级路径</td>
+            </tr>
+            <tr>
+              <td><strong>《伊坂幸太郎教我的“拼图表达法”：如何在日常方案中进行多线线索嵌套？》</strong></td>
+              <td><span class="topic-badge">职场技能</span></td>
+              <td>不要再做单一线性的无趣汇报。学习伊坂的多线环形叙事，在方案开头埋下不起眼的日常线索，在结尾处收网，让普通方案拥有惊艳戏剧张力。</td>
+              <td>伊坂幸太郎（12本书）的多线嵌套叙事手段</td>
+            </tr>
+            <tr>
+              <td><strong>《从“看书人”到“听书人”：我如何在2026年用68%的听书率重构我的日常碎片心智？》</strong></td>
+              <td><span class="topic-badge">方法分享</span></td>
+              <td>听书绝不等于浅阅读。分享如何在步行、通勤中，通过1.5倍速、有声书脑补、听后5分钟语音转文字，建立第二大脑听觉学习模型。</td>
+              <td>2026年个人听书占比68%的亲身介质变迁历程</td>
+            </tr>
+            <tr>
+              <td><strong>《如果你觉得生活失去了荒诞感，去读这3本阿尔贝·加缪的书》</strong></td>
+              <td><span class="topic-badge deep">深度哲学</span></td>
+              <td>当生活的意义感彻底坍塌，不要退缩，像加缪笔下的西西弗斯一样，清醒地推石上山。把对荒诞的反抗，变成你现实生活中最硬核的解药。</td>
+              <td>《阿尔贝·加缪》（3本书如《局外人》、《西西弗神话》）</td>
+            </tr>
+            <tr>
+              <td><strong>《重度历史爱好者的避坑指南：为什么我强烈推荐你硬着头皮啃完这本冷门史？》</strong></td>
+              <td><span class="topic-badge">小众安利</span></td>
+              <td>避开快餐化营销历史，拆解一本书如何全方位复刻伊朗五百年的血泪与地缘博弈。适合分享给渴望追求“重工业级阅读感”的硬核书友。</td>
+              <td>2026年正在阅读的《伊朗五百年》大部头精读体验</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Module 9: 缺失知识类型 -->
+    <div class="card">
+      <h2 class="section-title"><span class="title-main"><span class="section-no">09</span>认知空缺与缺失知识诊断</span><span class="subtitle">高阶理性拼图：从直觉向机制的拼补</span></h2>
+      <div class="gap-grid">
+        
+        <div class="gap-card">
+          <span class="gap-priority high">🚨 必须立即补充（高优先级）</span>
+          <span class="gap-title">微观经济学与实操商业博弈</span>
+          <p class="gap-body">
+            您当前在资本运转、组织定价 and 成本竞争等微观领域存在大面积认知空缺。
+            不补齐微观商业博弈常识，您优秀的人文宏观直觉就无法转化为可供生存、晋升和变现的强有力工具，容易形成思想悬空。
+          </p>
+        </div>
+
+        <div class="gap-card">
+          <span class="gap-priority medium">⚖️ 值得系统补充（中优先级）</span>
+          <span class="gap-title">宏观地缘经济、系统动力学</span>
+          <p class="gap-body">
+            对局部细节战史极其敏锐，但微观局部的总和并不等于宏观。
+            系统补充地缘宏观经济和系统论，能够将您的微观“复盘兴趣”整体升级为对“周期规律和地缘大趋势”的严谨预判能力。
+          </p>
+        </div>
+
+        <div class="gap-card">
+          <span class="gap-priority low">☕ 暂时不宜增加（低优先级）</span>
+          <span class="gap-title">幻想叙事、网文与轻推理</span>
+          <p class="gap-body">
+            这部分您已经沉淀了 500+ 小时，脑部的“多线叙事神经网络”已处于极度饱和状态。
+            继续堆积该类型阅读在边际效应上基本递减，容易沦为低负荷的避难温床，建议在接下来 12 个月严格进行购买克制。
+          </p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Module 10: 补充推荐 -->
+    <div class="card">
+      <h2 class="section-title"><span class="title-main"><span class="section-no">10</span>深度知识补给行动书架</span><span class="subtitle">破除“堡垒自嗨”的科学补给路径</span></h2>
+      <div class="rec-list">
+        
+        <div class="rec-item">
+          <div class="rec-type-badge">系统科学</div>
+          <div class="rec-target">
+            <span class="rec-name">《系统之美》（Systems Thinking）</span>
+            <span class="rec-source">德内拉·梅多斯 著</span>
+          </div>
+          <p class="rec-reason">
+            <strong>推荐原由：</strong> 完美的现实连接桥梁。它能极其严谨地将您在《易经》和《三体》中孕育的对“混沌系统的宏观迷恋”，无缝平移至现实商业组织和现代反馈回路中，提供高度科学的观察视野。
+          </p>
+        </div>
+
+        <div class="rec-item">
+          <div class="rec-type-badge">博弈科学</div>
+          <div class="rec-target">
+            <span class="rec-name">《反脆弱》（Antifragile）</span>
+            <span class="rec-source">纳西姆·尼古拉斯·塔勒布 著</span>
+          </div>
+          <p class="rec-reason">
+            <strong>推荐原由：</strong> 绝佳的行动助推器。您通过《清醒地活》形成了以“被动接纳、心灵退守”来对冲痛苦的心智模式，而《反脆弱》则系统性地教导：如何在极度不确定和无序的前线中，建立非对称优势去主动获利。
+          </p>
+        </div>
+
+        <div class="rec-item">
+          <div class="rec-type-badge">前沿报告</div>
+          <div class="rec-target">
+            <span class="rec-name">麦肯锡 / 高盛 2026 最新行业研究</span>
+            <span class="rec-source">《2026年全球生成式人工智能重塑产业与重组心智白皮书》</span>
+          </div>
+          <p class="rec-reason">
+            <strong>推荐原由：</strong> 强制冷凝人文感性。行业报告极其残酷的数据核算、算力边界及降本分析，能最快击碎虚构的科幻幻觉，强迫心智直面当下最深刻的、真实的科技质感。
+          </p>
+        </div>
+
+        <div class="rec-item">
+          <div class="rec-type-badge">策略学科</div>
+          <div class="rec-target">
+            <span class="rec-name">耶鲁大学公开课：《博弈论基础》</span>
+            <span class="rec-source">Yale Open Course: Game Theory</span>
+          </div>
+          <p class="rec-reason">
+            <strong>推荐原由：</strong> 战术热忱的数理升维。这门经典博弈课程能够促使您从对局部战史（遥远的桥）的感性同情和角色扮演中抽离，真正使用严格的模型来测算合作、背叛与对抗策略，大幅度提高日常决策段位。
+          </p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 最终研判结论 (学术/策略顾问级大结局) -->
+    <div class="verdict-box">
+      <h3 class="verdict-title">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 22px; height: 22px; color: #38bdf8;">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+        </svg>
+        分析师团队最终研判意见（Strategic Audit Findings）
+      </h3>
+      <div class="verdict-list">
+        
+        <div class="verdict-item">
+          <div class="verdict-num">1</div>
+          <div class="verdict-text">
+            <strong>虚实两极结构稳固，但现实摩擦力不足：</strong> 数据表明您的虚构阅读和心理调频表现出极强的“闭合心智安全堡垒”特征。高密度的感性投入在帮您维系灵魂秩序的同时，也在一定程度上解构 and 代偿了您在粗糙复杂的商业世界中去建立物理控制权、忍受现实泥涉的野心和欲望。
+          </div>
+        </div>
+
+        <div class="verdict-item">
+          <div class="verdict-num">2</div>
+          <div class="verdict-text">
+            <strong>私密标注严重滞留，公开信息池极度枯竭：</strong> 8,760 条私密笔记处于自我闭合自嗨的极高溢出状态。这可能表明您具有强烈的自我倾诉、复盘动机，但面临公开表达和输出习惯的堵塞。将 1% 的笔记改写、重组并公开，是冲刷认知幻觉、迫使思考发生真正蜕变的低门槛出路。
+          </div>
+        </div>
+
+        <div class="verdict-item">
+          <div class="verdict-num">3</div>
+          <div class="verdict-text">
+            <strong>警惕听书接管下的“思维惯性变浅”：</strong> 2026年听书占比攀升至 68%，极大地开发了日常通勤等零碎时段，但声音介质的线性特质在客观上不容许进行“纸面推敲、反复比对、反思与逻辑质询”。强烈建议将 30% 黄金静默时段强制归还给严格的非虚构纯文字深度凝视。
+          </div>
+        </div>
+
+        <div class="verdict-item">
+          <div class="verdict-num">4</div>
+          <div class="verdict-text">
+            <strong>心智边际效应递减明显，急需强制转换：</strong> 未来 12 个月内，强烈不宜继续增购网络小说、轻型推理、科幻设定小说，将其购买力硬性转换为现实的商业逻辑、宏观地缘经济 and 实操项目推进工具，中和文学的过度防御感。
+          </div>
+        </div>
+
+        <div class="verdict-item">
+          <div class="verdict-num">5</div>
+          <div class="verdict-text">
+            <strong>融合直觉与逻辑，培育战略级决策引擎：</strong> 对东方宇宙生克（易经）的宏观循环直觉，以及对微观战役局部细节（遥远的桥）的精密解构，是您心智拼图中极其罕见的两项优秀原始矿石。通过系统科学（系统之美）和博弈模型的中和与冶炼，极有可能在现实世界中为您熔铸出无可匹敌的顶层战略决策引擎。
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 页脚与免责声明 -->
+    <div class="footer">
+      <p>© 2026 微信读书 · 个人认知结构深度分析研究简报 ｜ 排除主观幻觉，寻求真实秩序</p>
+      <div class="disclaimer-grid">
+        <div class="disclaimer-box">
+          <h6>⚖️ 直接客观行为数据支持的事实模块</h6>
+          <p>
+            1108小时累计阅读时长、近11年（2015/06/17）注册历史、2417天数、331读过、110读完、8,760条高密度想法和笔记旁批、Top 10书籍时间及比值、2026年累计41h（听书占比68%、伊朗五百年精细精听时长）、前十作者及核心四家出版社、最活跃时段23:00和09:00记录。
+          </p>
+        </div>
+        <div class="disclaimer-box">
+          <h6>🔬 结合高阶统计信号与心智模型推演的分析模块</h6>
+          <p>
+            阅读质量中虚构逃避心流占比（60%）的量化推导、关于“心智代偿与安全堡垒”的心理学客观诊断、书籍关系中《清醒》与《道诡》的双律背反模型、知识结构缺口对商业 and 决策行为的风险危害预估、四维可尝试行动策略及10条高传播力选题的逻辑孵化。
+          </p>
+        </div>
+      </div>
+      <div class="footer-divider"></div>
+      <p style="font-size: 0.75rem; color: var(--text-dark);">
+        双击本地预览。报告布局完美适配 Chrome 与 Safari。可按下 <code>Cmd + P</code> (Mac) 或 <code>Ctrl + P</code> (Windows) 另存为 PDF 进行长效无暇高清备份，以便在工作或生活中长周期对照复盘。
+      </p>
+    </div>
+
+  </div>
+
+  <!-- 📱 电脑/手机端视图切换控制台 -->
+  <div class="view-control-panel">
+    <div class="view-control-title">🌓 报告视图控制</div>
+    <button class="view-btn active" id="btn-desktop" onclick="toggleView('desktop')">
+      <span>💻</span> 电脑 A4 视图
+    </button>
+    <button class="view-btn" id="btn-phone" onclick="toggleView('phone')">
+      <span>📱</span> 手机无缝视图
+    </button>
+  </div>
+
+  <script>
+    function toggleView(mode) {
+      const body = document.body;
+      const btnDesktop = document.getElementById('btn-desktop');
+      const btnPhone = document.getElementById('btn-phone');
+
+      if (mode === 'phone') {
+        body.classList.add('phone-mode-active');
+        btnPhone.classList.add('active');
+        btnDesktop.classList.remove('active');
+      } else {
+        body.classList.remove('phone-mode-active');
+        btnDesktop.classList.add('active');
+        btnPhone.classList.remove('active');
+      }
+    }
+  </script>
+
+</body>
+</html>
